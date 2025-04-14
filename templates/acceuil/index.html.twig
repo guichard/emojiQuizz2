@@ -1,0 +1,189 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Emoji Quiz Game - It's in the Game{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        :root {
+            --primary-color: #FF6B6B;
+            --secondary-color: #4ECDC4;
+            --dark-color: #292F36;
+            --light-color: #F7FFF7;
+            --accent-color: #FFE66D;
+        }
+
+        .game-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Conservez le reste de votre CSS existant */
+        
+        body {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            color: var(--dark-color);
+            margin: 0;
+            padding: 0;
+        }
+        
+        .game-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            margin-top: 5vh;
+            max-width: 800px;
+            text-align: center;
+        }
+        
+        .game-title {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .game-slogan {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: var(--dark-color);
+        }
+        
+        .emoji-display {
+            font-size: 5rem;
+            margin: 2rem 0;
+            animation: bounce 2s infinite;
+        }
+        
+        .btn-game {
+            background-color: var(--dark-color);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn-game:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            background-color: var(--primary-color);
+        }
+        
+        .btn-start {
+            background-color: var(--accent-color);
+            color: var(--dark-color);
+            font-weight: bold;
+        }
+        
+        .game-features {
+            display: flex;
+            justify-content: space-around;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .feature {
+            flex: 1;
+            min-width: 200px;
+            margin: 1rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        footer {
+            margin-top: 3rem;
+            padding: 1rem;
+            color: white;
+            text-align: center;
+        }
+        <style>
+        .btn-question {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 24px;
+            background-color: #4ECDC4;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+        .btn-question:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(78, 205, 196, 0.3);
+            background-color: #3dbeb6;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="game-wrapper">
+    <div class="container game-container">
+        <div class="emoji-display">🎮🤔🎲</div>
+        <h1 class="game-title">It's in the Game</h1>
+        <p class="game-slogan">Emoji Quiz Challenge</p>
+        
+        <div class="text-center">
+            <a href="{{ path('app_game_play') }}" class="btn-game btn-start">Commencer le jeu</a>
+            <button class="btn-game">Comment jouer</button>
+            <button class="btn-game">Classement</button>
+        </div>
+        
+        <div class="game-features">
+            <div class="feature">
+                <h3>🎯 Défi</h3>
+                <p>Devinez les mots cachés derrière les combinaisons d'emoji</p>
+            </div>
+            <div class="feature">
+                <h3>🏆 Classement</h3>
+                <p>Montez dans le classement avec vos bonnes réponses</p>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Bouton pour accéder aux questions -->
+    <a href="{{ path('app_question_index') }}" class="btn-question">
+        <i class="fas fa-question-circle me-2"></i>
+        Gérer les Questions
+    </a>
+
+
+    <footer>
+        <p>© {{ "now"|date("Y") }} Emoji Quiz Game - Tous droits réservés</p>
+    </footer>
+{% endblock %}

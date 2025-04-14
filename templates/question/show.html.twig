@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Question{% endblock %}
+
+{% block body %}
+    <h1>Question</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ question.id }}</td>
+            </tr>
+            <tr>
+                <th>Emoji1</th>
+                <td>{{ question.emoji1 }}</td>
+            </tr>
+            <tr>
+                <th>Emoji2</th>
+                <td>{{ question.emoji2 }}</td>
+            </tr>
+            <tr>
+                <th>Emoji3</th>
+                <td>{{ question.emoji3 }}</td>
+            </tr>
+            <tr>
+                <th>Reponse</th>
+                <td>{{ question.reponse }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_question_index') }}">back to list</a>
+
+    <a href="{{ path('app_question_edit', {'id': question.id}) }}">edit</a>
+
+    {{ include('question/_delete_form.html.twig') }}
+{% endblock %}
