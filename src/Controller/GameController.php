@@ -76,3 +76,9 @@ class GameController extends AbstractController
         return $this->redirectToRoute('app_game_play');
     }
 }
+$score = new Score();
+$score->setUser($this->getUser());
+$score->setValeur($session->get('score'));
+$score->setDatePartie(new \DateTime());
+$entityManager->persist($score);
+$entityManager->flush();

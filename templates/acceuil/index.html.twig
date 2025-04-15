@@ -202,7 +202,7 @@
     </div>
 
     <!-- LIEN ADMIN UNIQUEMENT SI ADMIN CONNECTÉ -->
-    {% if is_granted('ROLE_ADMIN') %}
+    {% if is_granted("ROLE_ADMIN") %}
         <div class="text-center mt-3">
             <a href="{{ path('app_question_index') }}" class="btn-question">
                 <i class="fas fa-question-circle me-2"></i>

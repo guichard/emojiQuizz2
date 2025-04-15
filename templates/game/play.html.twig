@@ -127,6 +127,25 @@
             border-color: var(--secondary);
             box-shadow: 0 0 15px rgba(78, 205, 196, 0.2);
         }
+                .top-buttons {
+            margin-left: auto;
+        }
+
+        .top-buttons a {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .top-buttons a:hover {
+            background-color: #ff4d4d;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
 
         .btn-submit {
             display: inline-block;
@@ -216,20 +235,16 @@
                 </svg>
                 Retour à l'accueil
             </a>
-            
+            <div class="top-buttons" style="margin-left: auto;">
+                <a href="{{ path('app_logout') }}" class="btn-nav">Déconnexion</a>
+            </div>
+
             <div class="game-info">
                 <div class="score">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                         <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
                     </svg>
                     Score: <span>{{ app.session.get('score', 0) }}</span>
-                </div>
-                <div class="timer">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                        <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5.6z"/>
-                        <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64a.715.715 0 0 1 .012-.013l.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354a.512.512 0 0 1-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5zM8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3z"/>
-                    </svg>
-                    Temps: <span id="timer">60</span>s
                 </div>
             </div>
         </div>
@@ -268,21 +283,6 @@
     </div>
 
     <script>
-        // Timer
-        let timeLeft = 60;
-        const timerElement = document.getElementById('timer');
-        
-        const timer = setInterval(() => {
-            timeLeft--;
-            timerElement.textContent = timeLeft;
-            
-            if(timeLeft <= 0) {
-                clearInterval(timer);
-                alert("Temps écoulé ! Votre score final : " + {{ app.session.get('score', 0) }});
-                window.location.href = "{{ path('app_acceuil') }}";
-            }
-        }, 1000);
-
         // Focus automatique sur le champ de réponse
         document.querySelector('.answer-input')?.focus();
     </script>
