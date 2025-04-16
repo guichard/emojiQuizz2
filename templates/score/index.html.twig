@@ -1,70 +1,121 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Classement - Emoji Quiz{% endblock %}
+
 {% block stylesheets %}
+    {{ parent() }}
     <style>
-        /* Classement - tableau des scores */
+        :root {
+            --primary-color: #FF6B6B;
+            --secondary-color: #4ECDC4;
+            --dark-color: #292F36;
+            --light-color: #F7FFF7;
+            --accent-color: #FFE66D;
+        }
 
-.container {
-    max-width: 800px;
-    margin: auto;
-    padding: 2rem;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-}
+        body {
+            position: relative;
+            z-index: 0;
+            background-color:rgb(219, 224, 231);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            color: var(--dark-color);
+            margin: 0;
+            padding: 0;
+        }
 
-h1 {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-    color: #FF6B6B;
-}
+        .emoji-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
 
-.table {
-    width: 100%;
-    border-collapse: collapse;
-    overflow: hidden;
-    border-radius: 10px;
-}
+        .emoji-bg img {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            opacity: 0.7;
+            animation: float 10s linear infinite;
+        }
 
-.table thead {
-    background-color: #6c63ff;
-    color: #fff;
-}
+        @keyframes float {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
 
-.table th, .table td {
-    padding: 1rem;
-    text-align: center;
-    font-size: 1rem;
-}
+        .score-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 1;
+        }
 
-.table tbody tr {
-    transition: background-color 0.3s ease;
-}
+        .score-container {
+            background-color: rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            max-width: 800px;
+            width: 100%;
+        }
 
-.table tbody tr:hover {
-    background-color: #f5f5f5;
-}
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
 
-.table-striped tbody tr:nth-child(odd) {
-    background-color: #f9f9f9;
-}
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow: hidden;
+            border-radius: 10px;
+        }
 
-@media screen and (max-width: 600px) {
-    .table th, .table td {
-        font-size: 0.9rem;
-        padding: 0.7rem;
-    }
+        .table thead {
+            background-color: #6c63ff;
+            color: #fff;
+        }
 
-    h1 {
-        font-size: 1.5rem;
-    }
-}
- .top-buttons {
+        .table th, .table td {
+            padding: 1rem;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .table tbody tr {
+            transition: background-color 0.3s ease;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .table-striped tbody tr:nth-child(odd) {
+            background-color: #f9f9f9;
+        }
+
+        .top-buttons {
             display: flex;
             justify-content: flex-end;
             padding: 1rem;
             gap: 1rem;
+            position: relative;
+            z-index: 2;
         }
 
         .top-buttons a {
@@ -80,40 +131,70 @@ h1 {
         .top-buttons a:hover {
             background-color: rgba(0,0,0,0.7);
         }
+
+        @media screen and (max-width: 600px) {
+            .table th, .table td {
+                font-size: 0.9rem;
+                padding: 0.7rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
     </style>
 {% endblock %}
 
 {% block body %}
+    <div class="emoji-bg">
+        <img src="/openmoji/1F389.png" style="top: 5%; left: 10%;">
+        <img src="/openmoji/1F973.png" style="top: 20%; left: 20%;">
+        <img src="/openmoji/1F680.png" style="top: 30%; left: 40%;">
+        <img src="/openmoji/1F4A5.png" style="top: 45%; left: 50%;">
+        <img src="/openmoji/1F9E9.png" style="top: 55%; left: 60%;">
+        <img src="/openmoji/1F600.png" style="top: 65%; left: 70%;">
+        <img src="/openmoji/1F609.png" style="top: 70%; left: 80%;">
+        <img src="/openmoji/1F602.png" style="top: 75%; left: 90%;">
+        <img src="/openmoji/1F97A.png" style="top: 80%; left: 15%;">
+        <img src="/openmoji/1F4A1.png" style="top: 85%; left: 25%;">
+        <img src="/openmoji/1F4BB.png" style="top: 90%; left: 35%;">
+        <img src="/openmoji/1F44D.png" style="top: 95%; left: 45%;">
+        <img src="/openmoji/1F525.png" style="top: 10%; left: 50%;">
+        <img src="/openmoji/1F622.png" style="top: 12%; left: 60%;">
+    </div>
+
     <div class="top-buttons">
         <a href="{{ path('app_acceuil') }}">🏠 Accueil</a>
         <a href="{{ path('app_game_play') }}">🎮 Jouer</a>
         <a href="{{ path('app_logout') }}">🚪 Déconnexion</a>
     </div>
 
-        <h1>🏆 Classement des meilleurs scores</h1>
+    <div class="score-wrapper">
+        <div class="score-container">
+            <h1>🏆 Classement des meilleurs scores</h1>
 
-        <table class="table table-striped mt-4">
-            <thead>
-                <tr>
-                    <th>Joueur</th>
-                    <th>Score</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for score in meilleurs_scores %}
+            <table class="table table-striped mt-4">
+                <thead>
                     <tr>
-                        <td>{{ score.user.email }}</td>
-                        <td>{{ score.valeur }}</td>
-                        <td>{{ score.datePartie|date('d/m/Y H:i') }}</td>
+                        <th>Joueur</th>
+                        <th>Score</th>
+                        <th>Date</th>
                     </tr>
-                {% else %}
-                    <tr>
-                        <td colspan="3">Aucun score enregistré pour le moment.</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for score in meilleurs_scores %}
+                        <tr>
+                            <td>{{ score.user.email }}</td>
+                            <td>{{ score.valeur }}</td>
+                            <td>{{ score.datePartie|date('d/m/Y H:i') }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="3">Aucun score enregistré pour le moment.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 {% endblock %}
-
