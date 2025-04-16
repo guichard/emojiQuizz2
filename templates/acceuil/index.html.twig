@@ -5,7 +5,6 @@
 {% block stylesheets %}
     {{ parent() }}
     <style>
-        /* styles conservés ici - inchangés */
         :root {
             --primary-color: #FF6B6B;
             --secondary-color: #4ECDC4;
@@ -15,12 +14,42 @@
         }
 
         body {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            position: relative;
+            z-index: 0;
+            background-color:rgb(219, 224, 231);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             min-height: 100vh;
             color: var(--dark-color);
             margin: 0;
             padding: 0;
+        }
+
+        .emoji-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .emoji-bg img {
+            position: absolute;
+            width: 60px;  /* Taille ajustée pour plus d'emojis visibles */
+            height: 60px;
+            opacity: 0.7;  /* Moins transparent pour plus de visibilité */
+            animation: float 15s linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+            }
         }
 
         .game-wrapper {
@@ -30,10 +59,12 @@
             min-height: 100vh;
             padding: 20px;
             box-sizing: border-box;
+            position: relative;
+            z-index: 1;
         }
 
         .game-container {
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0.12);
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             padding: 2rem;
@@ -124,7 +155,7 @@
             display: inline-flex;
             align-items: center;
             padding: 12px 24px;
-            background-color: #4ECDC4;
+            background-color:rgb(38, 43, 42);
             color: white;
             text-decoration: none;
             border-radius: 50px;
@@ -136,7 +167,7 @@
         .btn-question:hover {
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(78, 205, 196, 0.3);
-            background-color: #3dbeb6;
+            background-color:rgb(31, 34, 34);
         }
 
         .top-buttons {
@@ -144,6 +175,8 @@
             justify-content: flex-end;
             padding: 1rem;
             gap: 1rem;
+            position: relative;
+            z-index: 2;
         }
 
         .top-buttons a {
@@ -163,6 +196,25 @@
 {% endblock %}
 
 {% block body %}
+    <!-- Émojis flottants -->
+    <div class="emoji-bg">
+        <!-- On peut ajouter plus d'images emoji ici pour les disperser sur la page -->
+        <img src="/openmoji/1F389.png" style="top: 5%; left: 10%;">
+        <img src="/openmoji/1F973.png" style="top: 20%; left: 20%;">
+        <img src="/openmoji/1F680.png" style="top: 30%; left: 40%;">
+        <img src="/openmoji/1F4A5.png" style="top: 45%; left: 50%;">
+        <img src="/openmoji/1F9E9.png" style="top: 55%; left: 60%;">
+        <img src="/openmoji/1F600.png" style="top: 65%; left: 70%;">
+        <img src="/openmoji/1F609.png" style="top: 70%; left: 80%;">
+        <img src="/openmoji/1F602.png" style="top: 75%; left: 90%;">
+        <img src="/openmoji/1F97A.png" style="top: 80%; left: 15%;">
+        <img src="/openmoji/1F4A1.png" style="top: 85%; left: 25%;">
+        <img src="/openmoji/1F4BB.png" style="top: 90%; left: 35%;">
+        <img src="/openmoji/1F44D.png" style="top: 95%; left: 45%;">
+        <img src="/openmoji/1F525.png" style="top: 10%; left: 50%;">
+        <img src="/openmoji/1F622.png" style="top: 12%; left: 60%;">
+    </div>
+
     <!-- BOUTONS DE CONNEXION & INSCRIPTION EN HAUT -->
     <div class="top-buttons">
         {% if app.user %}
@@ -179,7 +231,6 @@
             <h1 class="game-title">It's in the Game</h1>
             <p class="game-slogan">Emoji Quiz Challenge</p>
 
-            <!-- BOUTONS PRINCIPAUX -->
             <div class="text-center d-flex flex-wrap justify-content-center">
                 {% if app.user %}
                     <a href="{{ path('app_game_play') }}" class="btn-game btn-start">Commencer le jeu</a>
@@ -187,7 +238,6 @@
                 <a href="#" class="btn-game">Comment jouer</a>
             </div>
 
-            <!-- FONCTIONNALITÉS -->
             <div class="game-features">
                 <div class="feature">
                     <h3>🎯 Défi</h3>
@@ -197,15 +247,13 @@
                     <h3>🏆 Classement</h3>
                     <p>Montez dans le classement avec vos bonnes réponses</p>
                     <a href="{{ path('app_score') }}" class="btn-nav">🏅 Classement</a>
-
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- LIEN ADMIN UNIQUEMENT SI ADMIN CONNECTÉ -->
     {% if is_granted("ROLE_ADMIN") %}
-        <div class="text-center mt-3">
+        <div class="text-center mt-3" style="z-index:2; position:relative;">
             <a href="{{ path('app_question_index') }}" class="btn-question">
                 <i class="fas fa-question-circle me-2"></i>
                 Gérer les Questions
