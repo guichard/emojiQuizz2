@@ -25,14 +25,14 @@ class Scores
     #[ORM\Column(type: 'datetime')]
     private \DateTimeInterface $datePartie;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $historique = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $records = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $claassement = null;
+    #[ORM\Column(nullable: true)] // ✅ ici on rend le champ nullable
+    private ?int $score = null;
 
     public function getId(): ?int
     {
@@ -80,7 +80,7 @@ class Scores
         return $this->historique;
     }
 
-    public function setHistorique(string $historique): static
+    public function setHistorique(?string $historique): static
     {
         $this->historique = $historique;
 
@@ -92,21 +92,21 @@ class Scores
         return $this->records;
     }
 
-    public function setRecords(string $records): static
+    public function setRecords(?string $records): static
     {
         $this->records = $records;
 
         return $this;
     }
 
-    public function getClaassement(): ?string
+    public function getScore(): ?int
     {
-        return $this->claassement;
+        return $this->score;
     }
 
-    public function setClaassement(string $claassement): static
+    public function setScore(?int $score): static
     {
-        $this->claassement = $claassement;
+        $this->score = $score;
 
         return $this;
     }

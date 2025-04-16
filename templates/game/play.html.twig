@@ -251,7 +251,7 @@
 
         <h1>Devinez la combinaison</h1>
         
-        {% if question %}
+       {% if question %}
             <div class="emoji-container">
                 <img src="{{ asset('openmoji/' ~ question.emoji1 ~ '.png') }}" class="emoji-img" alt="Emoji 1" loading="lazy">
                 <img src="{{ asset('openmoji/' ~ question.emoji2 ~ '.png') }}" class="emoji-img" alt="Emoji 2" loading="lazy">
@@ -261,14 +261,20 @@
             <form class="answer-form" action="{{ path('app_game_check') }}" method="POST">
                 <input type="hidden" name="question_id" value="{{ question.id }}">
                 <input type="text" 
-                       class="answer-input" 
-                       name="user_answer" 
-                       placeholder="Entrez votre réponse..." 
-                       required
-                       autofocus
-                       aria-label="Votre réponse">
+                    class="answer-input" 
+                    name="user_answer" 
+                    placeholder="Entrez votre réponse..." 
+                    required
+                    autofocus
+                    aria-label="Votre réponse">
                 <button type="submit" class="btn-submit">Valider</button>
             </form>
+
+            <div class="text-center mt-5">
+                <h4>⭐ Score actuel : {{ score }}</h4>
+            </div>
+
+
         {% else %}
             <p class="no-questions">Aucune question disponible pour le moment</p>
         {% endif %}
