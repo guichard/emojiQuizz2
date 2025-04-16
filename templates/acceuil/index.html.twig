@@ -97,7 +97,7 @@
         }
 
         .btn-game {
-            background-color: var(--dark-color);
+            background-color: rgba(255, 255, 255, 0.32);
             color: white;
             border: none;
             padding: 1rem 2rem;
@@ -115,7 +115,25 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.2);
             background-color: var(--primary-color);
         }
+        .btn-nav {
+            background-color: rgba(255, 255, 255, 0.32);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
+        .btn-nav:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            background-color: var(--primary-color);
+        }
         .btn-start {
             background-color: var(--accent-color);
             color: var(--dark-color);
@@ -124,6 +142,7 @@
 
         .game-features {
             display: flex;
+            background-color: rgba(255, 255, 255, 0.12);
             justify-content: space-around;
             margin: 3rem 0;
             flex-wrap: wrap;
@@ -134,7 +153,7 @@
             min-width: 200px;
             margin: 1rem;
             padding: 1.5rem;
-            background: white;
+            background-color: rgba(255, 255, 255, 0.12);
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
@@ -230,18 +249,19 @@
             <div class="emoji-display">🎮🤔🎲</div>
             <h1 class="game-title">It's in the Game</h1>
             <p class="game-slogan">Emoji Quiz Challenge</p>
-
+            <h2 class="game-title">connectez-vous pour jouer</h2>
             <div class="text-center d-flex flex-wrap justify-content-center">
                 {% if app.user %}
                     <a href="{{ path('app_game_play') }}" class="btn-game btn-start">Commencer le jeu</a>
                 {% endif %}
-                <a href="#" class="btn-game">Comment jouer</a>
+                
             </div>
 
             <div class="game-features">
                 <div class="feature">
                     <h3>🎯 Défi</h3>
                     <p>Devinez les mots cachés derrière les combinaisons d'emoji</p>
+                    <a href="#" class="btn-game">Comment jouer</a>
                 </div>
                 <div class="feature">
                     <h3>🏆 Classement</h3>
